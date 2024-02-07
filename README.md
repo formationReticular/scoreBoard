@@ -12,5 +12,13 @@ update pair of home and away team score, update total score as sum
 returns sorted list of all games in format "HomeTeam 1 - AwayTeam 0"  
 games sorted by descending total score, if total score is same - sorted by the most recent
 
+Assumptions:
+- next score for team couldn't be less than current  
+
+ToDo
+- add Countries enum + country name validaton
+ 
+
+
 
    
