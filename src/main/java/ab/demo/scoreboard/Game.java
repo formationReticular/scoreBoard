@@ -17,10 +17,18 @@ class Game {
     }
 
     static Game createGame(int id, String homeTeam, String awayTeam) {
+        if (homeTeam == null || awayTeam == null
+                || homeTeam.isBlank() || awayTeam.isBlank()) {
+            throw new GameException("Home team and Away team should be not null/blank");
+        }
         return new Game(id, homeTeam, awayTeam);
     }
 
-    void updateGame(byte homeTeamScore, byte awayTeamScore) {
+    void updateGame(int homeTeamScore, int awayTeamScore) {
+        if (homeTeamScore < this.homeTeamScore || awayTeamScore < this.awayTeamScore
+                || homeTeamScore < 0 || awayTeamScore < 0) {
+            throw new GameException("New score value could be less than previous or negative");
+        }
         this.homeTeamScore = homeTeamScore;
         this.awayTeamScore = awayTeamScore;
         this.totalScore = homeTeamScore + awayTeamScore;
