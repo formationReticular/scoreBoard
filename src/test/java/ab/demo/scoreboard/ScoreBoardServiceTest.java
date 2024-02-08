@@ -3,8 +3,6 @@ package ab.demo.scoreboard;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.List;
-
 public class ScoreBoardServiceTest {
     @Test
     public void testSummaryContainsAddedTeams() {
@@ -27,8 +25,8 @@ public class ScoreBoardServiceTest {
 
     @Test
     public void testSummaryContainsLastScore() {
-        Integer lastHomeTeamScore = 4;
-        Integer lastAwayTeamScore = 7;
+        int lastHomeTeamScore = 4;
+        int lastAwayTeamScore = 7;
 
         ScoreBoardService service = new ScoreBoardService();
         service.startGame("Nicaragua", "Singapore");
@@ -36,21 +34,21 @@ public class ScoreBoardServiceTest {
         service.updateScore(lastHomeTeamScore, lastAwayTeamScore);
         service.finishGame();
 
-        Assert.assertTrue(service.getSummaryByTotal().contains(lastHomeTeamScore.toString()));
-        Assert.assertTrue(service.getSummaryByTotal().contains(lastAwayTeamScore.toString()));
+        Assert.assertTrue(service.getSummaryByTotal().contains(String.valueOf(lastHomeTeamScore)));
+        Assert.assertTrue(service.getSummaryByTotal().contains(String.valueOf(lastAwayTeamScore)));
     }
 
     @Test
     public void testSummaryContainsGamesInExpectedOrder() {
         ScoreBoardService service = new ScoreBoardService();
         String vnzl = "Venezuela";
-        String chl = "Chilie";
+        String chl = "Chile";
 
         service.startGame("Honduras", "Brazil");
         service.updateScore(2, 3);
         service.finishGame();
 
-        service.startGame("Mexico", "Surinam");
+        service.startGame("Mexico", "Suriname");
         service.updateScore(1, 1);
         service.finishGame();
 
@@ -94,7 +92,7 @@ public class ScoreBoardServiceTest {
     }
 
     @Test
-    public void testSumaryContainsGamesInFormat() {
+    public void testSummaryContainsGamesInFormat() {
         String homeTeam = "Kazakhstan";
         int scoreHome = 3;
         String awayTeam = "Kyrgyzstan";
@@ -110,7 +108,7 @@ public class ScoreBoardServiceTest {
     }
 
     @Test
-    public void testSumaryContainsOnlyFinishedGames() {
+    public void testSummaryContainsOnlyFinishedGames() {
         ScoreBoardService service = new ScoreBoardService();
         service.startGame("Bolivia", "Bosnia");
         service.finishGame();
