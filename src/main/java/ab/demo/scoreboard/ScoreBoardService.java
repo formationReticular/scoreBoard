@@ -11,21 +11,31 @@ public class ScoreBoardService {
     private final List<Game> games = new ArrayList<>();
 
     public void startGame(String homeTeam, String awayTeam) {
+        if (currentGame != null) {
+            throw new ScoreBoardException("Need to finish current game first");
+        }
         currentGame = Game.createGame(obtainID(), homeTeam, awayTeam);
     }
 
     public void finishGame() {
+        if (currentGame == null) {
+            throw new ScoreBoardException("There is no current game to finish");
+        }
         games.add(currentGame);
         currentGame = null;
     }
 
-    public void updateScore(byte homeTeamScore, byte awayTeamScore) {
+    public void updateScore(int homeTeamScore, int awayTeamScore) {
+        if (currentGame == null) {
+            throw new ScoreBoardException("Need to start a new game first");
+        }
         currentGame.updateGame(homeTeamScore, awayTeamScore);
     }
 
     public String getSummaryByTotal() {
         List<Game> sorted = new ArrayList<>(games);
-        sorted.sort(Comparator.comparing(Game::getTotalScore).thenComparing(Game::getId));
+        sorted.sort(Comparator.comparing(Game::getTotalScore)
+                .thenComparing(Game::getId).reversed());
         return sorted.stream().map(this::printGame).collect(Collectors.joining("\n"));
     }
 
