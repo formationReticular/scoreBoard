@@ -17,6 +17,7 @@ Entry point is "ScoreBoardService", it has the following contract:
 * returns sorted list of all games in format "HomeTeam 1 - AwayTeam 0"  
 * games sorted by descending total score 
 * if total score is same - sorted by the most recent
+* returns all games joined in one String  
 
 Assumptions:
 - only one game at a time possible
@@ -27,10 +28,12 @@ Assumptions:
 - score must be only positive   
 - next score for team couldn't be less than current  
 - if score wasn't updated after start game and before finish - it stored as "0 - 0"  
-- get summary returns only all finished games (except current)  
+- get summary returns only all finished games (except current)    
+- get summary returns one String with all games  
 
 ToDo:
 - add Countries enum + country name validation
+- optionally - return summary in both formats: String and List  
  
 
 

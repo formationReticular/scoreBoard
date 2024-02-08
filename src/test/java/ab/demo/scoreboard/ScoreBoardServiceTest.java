@@ -17,10 +17,11 @@ public class ScoreBoardServiceTest {
         service.startGame(de, chn);
         service.finishGame();
 
-        Assert.assertTrue(service.getSummaryByTotal().contains(en));
-        Assert.assertTrue(service.getSummaryByTotal().contains(de));
-        Assert.assertTrue(service.getSummaryByTotal().contains(nam));
-        Assert.assertTrue(service.getSummaryByTotal().contains(chn));
+        String summary = service.getSummaryByTotal();
+        Assert.assertTrue(summary.contains(en));
+        Assert.assertTrue(summary.contains(de));
+        Assert.assertTrue(summary.contains(nam));
+        Assert.assertTrue(summary.contains(chn));
     }
 
     @Test
@@ -34,8 +35,9 @@ public class ScoreBoardServiceTest {
         service.updateScore(lastHomeTeamScore, lastAwayTeamScore);
         service.finishGame();
 
-        Assert.assertTrue(service.getSummaryByTotal().contains(String.valueOf(lastHomeTeamScore)));
-        Assert.assertTrue(service.getSummaryByTotal().contains(String.valueOf(lastAwayTeamScore)));
+        String summary = service.getSummaryByTotal();
+        Assert.assertTrue(summary.contains(String.valueOf(lastHomeTeamScore)));
+        Assert.assertTrue(summary.contains(String.valueOf(lastAwayTeamScore)));
     }
 
     @Test

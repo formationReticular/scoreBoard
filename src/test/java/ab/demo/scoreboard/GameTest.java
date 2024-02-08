@@ -34,7 +34,7 @@ public class GameTest {
 
     @Test(expected = GameException.class)
     public void testThrowExceptionWhenTeamNameIsNull() {
-        Game.createGame(11, "Chili", null);
+        Game.createGame(11, "Chile", null);
     }
 
     @Test(expected = GameException.class)
