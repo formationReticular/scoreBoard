@@ -20,8 +20,8 @@ Entry point is "ScoreBoardService", it has the following contract:
 
 Assumptions:
 - only one game at a time possible
-- it's not possible to finish game twice
 - need to finish current game before start new
+- it's not possible to finish game twice
 - team's name must be not null/blank
 - it's possible to update score only after game started  
 - score must be only positive   
