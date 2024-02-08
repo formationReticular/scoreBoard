@@ -1,8 +1,13 @@
 package ab.demo.scoreboard;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.Objects;
 
 class Game {
+
+    private static final Logger log = LoggerFactory.getLogger(Game.class);
     private final int id;
     private final String homeTeam;
     private final String awayTeam;
@@ -17,17 +22,20 @@ class Game {
     }
 
     static Game createGame(int id, String homeTeam, String awayTeam) {
+        log.info("Creating a new game with id: {}, homeTeam: {}, awayTeam: {}", id, homeTeam, awayTeam);
         if (homeTeam == null || awayTeam == null
                 || homeTeam.isBlank() || awayTeam.isBlank()) {
+            log.error("homeTeam/awayTeam is null/blank");
             throw new GameException("Home team and Away team should be not null/blank");
         }
         return new Game(id, homeTeam, awayTeam);
     }
 
     void updateGame(int homeTeamScore, int awayTeamScore) {
-        if (homeTeamScore < this.homeTeamScore || awayTeamScore < this.awayTeamScore
-                || homeTeamScore < 0 || awayTeamScore < 0) {
-            throw new GameException("New score value could be less than previous or negative");
+        log.info("Updating game with homeTeamScore: {}, awayTeamScore: {}", homeTeamScore, awayTeamScore);
+        if (homeTeamScore < this.homeTeamScore || awayTeamScore < this.awayTeamScore) {
+            log.error("homeTeamScore/awayTeamScore is less than previous");
+            throw new GameException("New score value should be more than previous");
         }
         this.homeTeamScore = homeTeamScore;
         this.awayTeamScore = awayTeamScore;
@@ -67,7 +75,7 @@ class Game {
                 ", homeTeamScore=" + homeTeamScore +
                 ", awayTeamScore=" + awayTeamScore +
                 ", totalScore=" + totalScore +
-                '}';
+                '}' + '\n';
     }
 
     @Override
